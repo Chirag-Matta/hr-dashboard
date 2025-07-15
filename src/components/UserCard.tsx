@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { useBookmarkStore } from '@/store/bookmarkStore';
 import Modal from '@/components/ui/Modal';
+import { useRouter } from 'next/navigation';
+
 
 type User = {
   id: number;
@@ -18,6 +20,8 @@ export default function UserCard({ user }: { user: User }) {
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarkStore();
   const bookmarked = isBookmarked(user.id);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
+
 
   return (
     <>
@@ -69,4 +73,12 @@ export default function UserCard({ user }: { user: User }) {
       </Modal>
     </>
   );
+  <button
+  className="bg-blue-500 text-white px-3 py-1 rounded"
+  onClick={() => router.push(`/employee/${user.id}`)}
+>
+  View
+</button>
 }
+
+
