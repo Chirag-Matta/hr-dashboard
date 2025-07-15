@@ -1,6 +1,6 @@
-// app/employee/[id]/page.tsx
 import { fetchUsers } from '@/lib/getUsers';
 import { notFound } from 'next/navigation';
+
 
 export default async function EmployeePage({ params }: { params: { id: string } }) {
   const users = await fetchUsers();
@@ -8,7 +8,6 @@ export default async function EmployeePage({ params }: { params: { id: string } 
 
   if (!user) return notFound();
 
-  // Mock bio and history
   const bio = `I am ${user.firstName}, working in the ${user.department} department with a passion for growth and impact.`;
   const history = Array.from({ length: 6 }, (_, i) => ({
     year: 2018 + i,
@@ -62,3 +61,5 @@ export default async function EmployeePage({ params }: { params: { id: string } 
     </main>
   );
 }
+
+

@@ -32,7 +32,7 @@ export default function SearchFilterBar({
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search by name, email, or department"
-        className="border rounded px-4 py-2 w-full sm:w-1/3"
+        className="border rounded px-4 py-2 w-full sm:w-1/3 bg-white dark:bg-gray-800 text-black dark:text-white"
       />
 
       <div className="flex flex-wrap gap-2 items-center">
@@ -40,8 +40,10 @@ export default function SearchFilterBar({
           <button
             key={dep}
             onClick={() => toggleItem(dep, departmentFilter, setDepartmentFilter)}
-            className={`px-3 py-1 rounded border ${
-              departmentFilter.includes(dep) ? 'bg-blue-500 text-white' : 'bg-gray-200'
+            className={`px-3 py-1 rounded border transition ${
+              departmentFilter.includes(dep)
+                  ? 'bg-blue-500 text-white'
+                  : 'bg-gray-200 dark:bg-gray-700 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600'
             }`}
           >
             {dep}
@@ -51,9 +53,12 @@ export default function SearchFilterBar({
           <button
             key={rate}
             onClick={() => toggleItem(rate, ratingFilter, setRatingFilter)}
-            className={`px-2 py-1 rounded border ${
-              ratingFilter.includes(rate) ? 'bg-yellow-500 text-white' : 'bg-gray-200'
+            className={`px-2 py-1 rounded border transition ${
+              ratingFilter.includes(rate)
+                ? 'bg-yellow-500 text-white'
+                : 'bg-gray-200 dark:bg-gray-700 text-black dark:text-white hover:bg-gray-300 dark:hover:bg-gray-600'
             }`}
+
           >
             {rate}⭐
           </button>
