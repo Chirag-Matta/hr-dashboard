@@ -1,11 +1,10 @@
-interface DummyUser {
+export interface DummyUser {
   id: number;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   image: string;
-  
   username?: string;
   age?: number;
   gender?: string;
@@ -17,7 +16,8 @@ interface DummyUser {
     country: string;
   };
 }
-interface User {
+
+export interface User {
   id: number;
   firstName: string;
   lastName: string;
@@ -34,10 +34,9 @@ interface User {
     state: string;
     country: string;
   };
-  rating: number;
-  department: string;
+  rating: number; 
+  department: string; 
 }
-
 
 interface DummyAPIResponse {
   users: DummyUser[];
@@ -51,21 +50,20 @@ export async function fetchUsers(): Promise<User[]> {
   const data: DummyAPIResponse = await res.json();
 
   const departments = ['HR', 'Engineering', 'Sales', 'Marketing'];
-  return data.users.map((user: DummyUser): User => {
-    return {
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      phone: user.phone,
-      image: user.image,
-      username: user.username,
-      age: user.age ?? 25, 
-      gender: user.gender,
-      birthDate: user.birthDate,
-      address: user.address,
-      rating: Math.floor(Math.random() * 5) + 1,
-      department: departments[Math.floor(Math.random() * departments.length)],
-    };
-  });
+
+  return data.users.map((user): User => ({
+    id: user.id,
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    phone: user.phone,
+    image: user.image || 'https://via.placeholder.com/150', 
+    username: user.username,
+    age: user.age ?? 25, 
+    gender: user.gender,
+    birthDate: user.birthDate,
+    address: user.address,
+    rating: Math.floor(Math.random() * 5) + 1, 
+    department: departments[Math.floor(Math.random() * departments.length)],
+  }));
 }
