@@ -1,10 +1,17 @@
 import { fetchUsers } from '@/lib/getUsers';
 import { notFound } from 'next/navigation';
 
+// Update the type definition for Next.js 15
+interface PageProps {
+  params: Promise<{ id: string }>;
+}
 
-export default async function EmployeePage({ params }: { params: { id: string } }) {
+export default async function EmployeePage({ params }: PageProps) {
+  // Await the params Promise
+  const { id } = await params;
+  
   const users = await fetchUsers();
-  const user = users.find((u) => u.id.toString() === params.id);
+  const user = users.find((u) => u.id.toString() === id);
 
   if (!user) return notFound();
 
@@ -61,5 +68,3 @@ export default async function EmployeePage({ params }: { params: { id: string } 
     </main>
   );
 }
-
-
