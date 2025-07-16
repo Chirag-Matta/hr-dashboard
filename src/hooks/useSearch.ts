@@ -39,6 +39,6 @@ export function useSearch(users: User[]) {
     setDepartmentFilter,
     ratingFilter,
     setRatingFilter,
-    filteredUsers: filtered,
+    filteredUsers: filtered as User[],
   };
 }
