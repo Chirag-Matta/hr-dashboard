@@ -1,4 +1,3 @@
-// Define the User interface based on DummyJSON API structure
 interface DummyUser {
   id: number;
   firstName: string;
@@ -6,7 +5,6 @@ interface DummyUser {
   email: string;
   phone: string;
   image: string;
-  // Add other properties you might be using from the API
   username?: string;
   age?: number;
   gender?: string;
@@ -19,13 +17,10 @@ interface DummyUser {
   };
 }
 
-// Define the enhanced User interface with your custom properties
 interface User extends DummyUser {
   rating: number;
   department: string;
 }
-
-// Define the API response structure
 interface DummyAPIResponse {
   users: DummyUser[];
   total: number;
@@ -38,8 +33,9 @@ export async function fetchUsers(): Promise<User[]> {
   const data: DummyAPIResponse = await res.json();
 
   const departments = ['HR', 'Engineering', 'Sales', 'Marketing'];
-  return data.users.map((user: DummyUser) => ({
+  return data.users.map((user: DummyUser): User => ({
     ...user,
+    age: user.age ?? 25, 
     rating: Math.floor(Math.random() * 5) + 1,
     department: departments[Math.floor(Math.random() * departments.length)],
   }));
