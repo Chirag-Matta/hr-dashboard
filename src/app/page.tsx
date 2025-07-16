@@ -9,8 +9,6 @@ import SearchFilterBar from '@/components/SearchFilterBar';
 import CreateUserModal from '@/components/CreateUserModal';
 import { useUserStore } from '@/store/userStore';
 
-
-
 export default function HomePage() {
   const { users, setInitialUsers } = useUserStore();
   const [loading, setLoading] = useState(true);
@@ -20,7 +18,7 @@ export default function HomePage() {
       setInitialUsers(data)
       setLoading(false);
     });
-  }, []);
+  }, [setInitialUsers]); // Added setInitialUsers to dependency array
 
   const {
     query,
@@ -45,15 +43,14 @@ export default function HomePage() {
         setRatingFilter={setRatingFilter}
       />
       <div className="flex justify-between items-center p-4">
-      <CreateUserModal />
-    </div>
+        <CreateUserModal />
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredUsers.map((user) => (
           <UserCard key={user.id} user={user} />
         ))}
       </div>
-
     </main>
   );
 }
